@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id('nis');
             $table->string('nama_siswa', 40);
-            $table->enum('jekel', ['LK', 'PR']);
-            $table->foreignId('grade_id') -> constrained('grades');
-            $table->enum('status', ['Aktif', 'Lulus', 'Pindah']);
+            $table->enum('jekel', ['LK', 'PR'])->default('LK');
+            $table->foreignId('grade_id')->constrained('grades');
+            $table->enum('status', ['Aktif', 'Lulus', 'Pindah'])->default('Aktif');
             $table->year('th_masuk');
             $table->timestamps();
         });

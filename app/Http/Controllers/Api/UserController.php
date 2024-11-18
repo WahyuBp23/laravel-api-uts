@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class StudentController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-       $data = Student::get();
-
+        $data = User::get();
         return response()->json(['data' => $data], 400);
     }
 
@@ -32,15 +31,15 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), Student::rules('insert'));
-        Student::customValidation($validator);
+         $validator = Validator::make($request->all(), User::rules('insert'));
+            User::customValidation($validator);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
 
         try {
-            $data = Student::create($request->all());
+            $data = User::create($request->all());
 
             return response()->json(['message' => 'Data berhasil disimpan', 'data' => $data], 200);
         } catch (\Throwable $e) {
