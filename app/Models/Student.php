@@ -29,7 +29,7 @@ class Student extends Model
     {
         if ($process == 'insert') {
             return [
-                'nis' => 'required|numeric|unique:students',
+                'nis' => 'required|numeric',
                 'nama_siswa' => 'required|string|max:225',
                 'grade_id' => 'required|string',
                 'th_masuk' => 'required|numeric',
@@ -37,7 +37,7 @@ class Student extends Model
 
         } elseif ($process == 'update') {
             return [
-                'nis' => 'required|numeric|unique:students',
+                'nis' => 'required|numeric',
                 'nama_siswa' => 'required|string|max:225',
                 'grade_id' => 'required|string',
                 'th_masuk' => 'required|numeric',

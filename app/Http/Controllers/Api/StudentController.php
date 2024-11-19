@@ -53,7 +53,13 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $data = Student::find($id);
+
+            return response()->json(['data' => $data], 200);
+        } catch (\Throwable $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -61,7 +67,13 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        try {
+            $data = Student::find($id);
+
+            return response()->json(['data' => $data], 200);
+        } catch (\Throwable $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -69,7 +81,21 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       $validator = Validator::make($request->all(), Student::rules('update'));
+        Student::customValidation($validator);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->messages()], 400);
+        }
+
+      try {
+            $data = Student::find($id);
+            $data->update($request->all());
+
+            return response()->json(['message' => 'Data berhasil diupdate', 'data' => $data]);
+        } catch (\Throwable $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -77,6 +103,13 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         try {
+            $data = Student::find($id);
+            $data->delete();
+
+            return response()->json(['message' => 'Data berhasil dihapus'], 200);
+        } catch (\Throwable $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
     }
 }
