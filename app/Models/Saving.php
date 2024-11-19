@@ -15,13 +15,6 @@ class Saving extends Model
         'jenis',
     ];
 
-    public function students() {
-        return $this->belongsTo(Student::class);
-    }
-
-    public function users() {
-        return $this->belongsTo(User::class);
-    }
 
       public static function rules($process)
     {

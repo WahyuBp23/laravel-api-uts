@@ -10,8 +10,4 @@ class Grade extends Model
         'grade'
     ];
 
-    public function students() {
-        return $this->belongsTo(Student::class);
-    }
-
 }
